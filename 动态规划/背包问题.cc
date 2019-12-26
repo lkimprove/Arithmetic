@@ -31,3 +31,37 @@ public:
         return F[n][m];
     }
 };
+
+
+//改进版
+class Solution {
+public:
+    /**
+     * @param m: An integer m denotes the size of a backpack
+     * @param A: Given n items with size A[i]
+     * @param V: Given n items with value V[i]
+     * @return: The maximum value
+     */
+    int backPackII(int m, vector<int> &A, vector<int> &V) {
+        // write your code here
+        int n = A.size();
+        
+        vector<int> F(m + 1, 0);
+        
+        //节省空间复杂度的做法
+        //因为计算时只需要上一行的数据，所以只需要一行数据即可
+        //计算当前位置数据时，需要上一行往前的位置，所以需要从后往前计算
+        for(int i = 0; i < n; i++){
+            for(int j = m; j > 0; j--){
+                if(A[i] > j){
+                    continue;
+                }
+                else{
+                    F[j] = max(F[j], F[j - A[i]] + V[i]);
+                }
+            }
+        }
+        
+        return F[m];
+    }
+};
