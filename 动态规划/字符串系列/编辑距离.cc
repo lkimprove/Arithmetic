@@ -11,11 +11,11 @@
 //  rorse -> rose (删除 ‘r’) rose -> ros (删除 ‘e’)
 
  //记 s 中以下标 i − 1 结尾的子串，与 t 中以下标 j − 1 结尾的子串的最小距离为 dp[i][j]，则
- //cur1 = min(dp[i - 1][j], dp[i][j - 1]) + 1;
- //cur2 = 
+ //t1 = min(dp[i - 1][j], dp[i][j - 1]) + 1;
+ //t2 = 
  //1.dp[i - 1][j - 1]; word1[i - 1] = word2[j - 1];
  //2.dp[i - 1][j - 1] + 1; word[i - 1] != word2[j-  1];
- 
+ //dp[i][j] = min(t1, t2);
  
  class Solution {
 public:
@@ -40,17 +40,17 @@ public:
         
         for(int i = 1; i <= s1; i++){
             for(int j = 1; j <= s2; j++){
-                int cur1 = min(dp[i - 1][j], dp[i][j - 1]) + 1;
+                int t1 = min(dp[i - 1][j], dp[i][j - 1]) + 1;
                 
-                int cur2 = 0;
+                int t2 = 0;
                 if(word1[i - 1] == word2[j - 1]){
-                    cur2 = dp[i - 1][j - 1];
+                    t2 = dp[i - 1][j - 1];
                 }
                 else{
-                    cur2 = dp[i - 1][j - 1] + 1;
+                    t2 = dp[i - 1][j - 1] + 1;
                 }
                 
-                dp[i][j] = min(cur1, cur2);
+                dp[i][j] = min(t1, t2);
             }
         }
         
